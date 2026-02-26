@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Træ Knapper</title>
+    <title>Grønt og Godt - Hjem</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js?v=2" defer></script>
@@ -12,14 +12,19 @@
     <header>
         <div id="userEmail" class="user-display"></div>
         <div class="button-container">
-            <button class="wood-button" id="loginBtn" onclick="location.href='login.html'">login</button>
-            <button class="wood-button" id="signupBtn" onclick="location.href='login.html?mode=signup'">Opret konto</button>
-            <button class="wood-button" id="bookBtn">book</button>
-            <button class="wood-button" id="adminBtn" style="display: none;" onclick="location.href='admin.html'">admin</button>
+            <button class="wood-button" id="loginBtn" onclick="location.href='login.html'">Login</button>
+            <button class="wood-button" id="signupBtn" onclick="location.href='login.html?mode=signup'">Opret Konto</button>
+            <button class="wood-button" id="adminBtn" style="display: none;" onclick="location.href='admin.html'">Admin</button>
         </div>
     </header>
     <main>
-        <h1></h1>
+        <div class="app-container" style="animation: fadeIn 1s ease-out;">
+            <h1 style="color: #ffd700; font-size: 3.5rem; text-transform: uppercase; margin-bottom: 20px; text-shadow: 2px 2px 5px rgba(0,0,0,0.5);">Grønt og Godt</h1>
+            <p style="font-size: 1.5rem; color: #daab47; margin-bottom: 40px; line-height: 1.6;">Velkommen til den officielle side for Grønt og Godt. Her kan du ansøge om medlemskab og booke tider.</p>
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button class="wood-button" style="padding: 15px 30px; font-size: 1.2rem;" onclick="location.href='book.html'">Book Tid Nu</button>
+            </div>
+        </div>
     </main>
 </body>
 </html>
