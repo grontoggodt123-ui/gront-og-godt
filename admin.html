@@ -25,9 +25,27 @@
             text-transform: uppercase;
         }
         .admin-content {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
             color: #daab47;
             margin-top: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: #111;
+        }
+        th, td {
+            border: 1px solid #5d2e0a;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #8b4513;
+            color: #ffd700;
+        }
+        tr:nth-child(even) {
+            background: #1a1a1a;
         }
     </style>
 </head>
@@ -40,12 +58,59 @@
     </header>
     <main>
         <div class="admin-container">
-            <h2>Admin Dashboard</h2>
+            <h2>Indsendte Ansøgninger</h2>
             <div class="admin-content">
-                <p>Velkommen til admin-panelet. Her kan du se alle indstillinger.</p>
-                <p>Denne side er kun synlig for administratorer.</p>
+                <table id="appTable">
+                    <thead>
+                        <tr>
+                            <th>E-mail</th>
+                            <th>Felt 1</th>
+                            <th>Felt 2</th>
+                            <th>Felt 3</th>
+                            <th>Felt 4</th>
+                            <th>Felt 5</th>
+                            <th>Felt 6</th>
+                        </tr>
+                    </thead>
+                    <tbody id="appBody">
+                        <!-- Data indlæses her -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </main>
+    <script>
+        window.addEventListener('load', async () => {
+            // Vent lidt på at auth check er færdig
+            setTimeout(async () => {
+                const { data, error } = await _supabase
+                    .from('applications')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error("Fejl ved hentning:", error);
+                    return;
+                }
+
+                const tbody = document.getElementById('appBody');
+                tbody.innerHTML = '';
+
+                data.forEach(app => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${app.user_email}</td>
+                        <td>${app.field1}</td>
+                        <td>${app.field2}</td>
+                        <td>${app.field3}</td>
+                        <td>${app.field4}</td>
+                        <td>${app.field5}</td>
+                        <td>${app.field6}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }, 500);
+        });
+    </script>
 </body>
 </html>
