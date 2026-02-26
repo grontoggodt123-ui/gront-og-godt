@@ -4,7 +4,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Liste over godkendte admin e-mails (ERSTAT MED DINE EGNE)
-const adminEmails = ['loxi190712@gmail.com'];
+const adminEmails = ['loxi190712@gmail.com','devantiermathias@gmail.com'];
 
 let isLoginMode = true;
 
