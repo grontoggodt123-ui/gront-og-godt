@@ -4,7 +4,7 @@ const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Liste over godkendte admin e-mails (ERSTAT MED DINE EGNE)
-const adminEmails = ['loxi190712@gmail.com','devantiermathias@gmail.com'];
+const adminEmails = ['loxi190712@gmail.com', 'devantiermathias@gmail.com'];
 
 let isLoginMode = true;
 
@@ -27,18 +27,11 @@ const setAuthMode = (loginMode) => {
 };
 
 if (authForm) {
-    // Tjek URL parametre for start-mode
     const urlParams = new URLSearchParams(window.location.search);
-    if (urlParams.get('mode') === 'signup') {
-        setAuthMode(false);
-    }
+    if (urlParams.get('mode') === 'signup') setAuthMode(false);
 
-    // Skift mellem Login og Opret konto
-    switchBtn?.addEventListener('click', () => {
-        setAuthMode(!isLoginMode);
-    });
+    switchBtn?.addEventListener('click', () => setAuthMode(!isLoginMode));
 
-    // Submit logik
     authForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         const email = document.getElementById('email').value;
@@ -46,7 +39,6 @@ if (authForm) {
         const username = document.getElementById('username')?.value;
 
         if (isLoginMode) {
-            // Login
             const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
             if (error) alert("Fejl: " + error.message);
             else {
@@ -54,59 +46,38 @@ if (authForm) {
                 window.location.href = 'index.html';
             }
         } else {
-            // Signup - Gem brugernavn i metadata
             const { data, error } = await _supabase.auth.signUp({ 
                 email, 
                 password,
-                options: {
-                    data: { display_name: username }
-                }
+                options: { data: { display_name: username } }
             });
             
-            if (error) {
-                alert("Fejl ved oprettelse: " + error.message);
-            } else {
-                // Forsøg at logge ind med det samme
-                const { data: loginData, error: loginError } = await _supabase.auth.signInWithPassword({ email, password });
-                
-                if (loginError) {
-                    alert("Konto oprettet! Log venligst ind manuelt.");
-                    window.location.href = 'login.html';
-                } else {
-                    alert("Konto oprettet og du er logget ind!");
-                    window.location.href = 'index.html';
-                }
+            if (error) alert("Fejl: " + error.message);
+            else {
+                const { error: loginError } = await _supabase.auth.signInWithPassword({ email, password });
+                if (loginError) window.location.href = 'login.html';
+                else window.location.href = 'index.html';
             }
         }
     });
 }
 
-// Tjek login status på tværs af sider
 const checkStatus = async () => {
     const { data: { user } } = await _supabase.auth.getUser();
     const loginBtn = document.getElementById('loginBtn');
     const signupBtn = document.getElementById('signupBtn');
     const adminBtn = document.getElementById('adminBtn');
+    const userDisplay = document.getElementById('userEmail');
+    
     const path = window.location.pathname;
     const isProtectedPage = path.includes('book.html') || path.includes('application.html');
     const isAdminPage = path.includes('admin.html') || path.includes('aktive.html');
 
     if (user) {
-        // Vis brugernavn i headeren (prioriter display_name fra metadata)
-        const userDisplay = document.getElementById('userEmail');
-        if (userDisplay) {
-            userDisplay.innerText = user.user_metadata?.display_name || user.email;
-        }
-
-        // Tjek om brugeren er admin
+        if (userDisplay) userDisplay.innerText = user.user_metadata?.display_name || user.email;
         const isAdmin = adminEmails.includes(user.email);
 
-        // Vis admin-knappen hvis man er admin
-        if (adminBtn && isAdmin) {
-            adminBtn.style.display = 'inline-block';
-        }
-
-        // Hvis man er logget ind, men prøver at gå på admin siden uden at være admin
+        if (adminBtn && isAdmin) adminBtn.style.display = 'inline-block';
         if (isAdminPage && !isAdmin) {
             window.location.href = 'index.html';
             return;
@@ -121,10 +92,7 @@ const checkStatus = async () => {
         }
         if (signupBtn) signupBtn.style.display = 'none';
     } else {
-        // Hvis man ikke er logget ind og prøver at se en beskyttet side eller admin side
-        if (isProtectedPage || isAdminPage) {
-            window.location.href = 'login.html';
-        }
+        if (isProtectedPage || isAdminPage) window.location.href = 'login.html';
     }
 };
 
