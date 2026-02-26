@@ -17,10 +17,12 @@ const authTitle = document.getElementById('authTitle');
 // Funktion til at skifte mode
 const setAuthMode = (loginMode) => {
     isLoginMode = loginMode;
+    const usernameGroup = document.getElementById('usernameGroup');
     if (authTitle) {
         authTitle.innerText = isLoginMode ? 'Login' : 'Opret konto';
         submitBtn.innerText = isLoginMode ? 'Log ind' : 'Opret konto';
         switchBtn.innerText = isLoginMode ? 'Skift til opret konto' : 'Skift til login';
+        if (usernameGroup) usernameGroup.style.display = isLoginMode ? 'none' : 'block';
     }
 };
 
@@ -41,6 +43,7 @@ if (authForm) {
         e.preventDefault();
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
+        const username = document.getElementById('username')?.value;
 
         if (isLoginMode) {
             // Login
@@ -51,8 +54,14 @@ if (authForm) {
                 window.location.href = 'index.html';
             }
         } else {
-            // Signup - Hvis 'Confirm email' er slået fra i Supabase, logger den automatisk ind
-            const { data, error } = await _supabase.auth.signUp({ email, password });
+            // Signup - Gem brugernavn i metadata
+            const { data, error } = await _supabase.auth.signUp({ 
+                email, 
+                password,
+                options: {
+                    data: { display_name: username }
+                }
+            });
             
             if (error) {
                 alert("Fejl ved oprettelse: " + error.message);
@@ -61,11 +70,7 @@ if (authForm) {
                 const { data: loginData, error: loginError } = await _supabase.auth.signInWithPassword({ email, password });
                 
                 if (loginError) {
-                    if (loginError.message.includes("not confirmed")) {
-                        alert("Kontoen er oprettet, men skal bekræftes i Supabase Dashboard (Authentication -> Users -> Confirm User).");
-                    } else {
-                        alert("Konto oprettet! Log venligst ind manuelt.");
-                    }
+                    alert("Konto oprettet! Log venligst ind manuelt.");
                     window.location.href = 'login.html';
                 } else {
                     alert("Konto oprettet og du er logget ind!");
@@ -87,6 +92,12 @@ const checkStatus = async () => {
     const isAdminPage = path.includes('admin.html') || path.includes('aktive.html');
 
     if (user) {
+        // Vis brugernavn i headeren (prioriter display_name fra metadata)
+        const userDisplay = document.getElementById('userEmail');
+        if (userDisplay) {
+            userDisplay.innerText = user.user_metadata?.display_name || user.email;
+        }
+
         // Tjek om brugeren er admin
         const isAdmin = adminEmails.includes(user.email);
 
