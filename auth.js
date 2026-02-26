@@ -67,11 +67,24 @@ const checkStatus = async () => {
     const loginBtn = document.getElementById('loginBtn');
     const signupBtn = document.getElementById('signupBtn');
     const adminBtn = document.getElementById('adminBtn');
+    const bookBtn = document.getElementById('bookBtn');
     const userDisplay = document.getElementById('userEmail');
     
     const path = window.location.pathname;
     const isProtectedPage = path.includes('book.html') || path.includes('application.html');
     const isAdminPage = path.includes('admin.html') || path.includes('aktive.html');
+
+    // Håndter book knappen på forsiden
+    if (bookBtn) {
+        bookBtn.onclick = () => {
+            if (user) {
+                window.location.href = 'book.html';
+            } else {
+                alert("Opret konto først");
+                window.location.href = 'login.html?mode=signup';
+            }
+        };
+    }
 
     if (user) {
         if (userDisplay) userDisplay.innerText = user.user_metadata?.display_name || user.email;
