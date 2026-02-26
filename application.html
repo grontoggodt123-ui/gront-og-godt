@@ -3,45 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ansøgning - Træ Knapper</title>
+    <title>Ansøgning - Grønt og Godt</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js?v=2" defer></script>
-    <style>
-        .app-container {
-            max-width: 600px;
-            margin: 50px auto;
-            background: rgba(0, 0, 0, 0.85);
-            padding: 40px;
-            border-radius: 20px;
-            border: 4px solid #8b4513;
-            color: white;
-        }
-        .app-container h2 {
-            text-align: center;
-            color: #ffd700;
-            margin-bottom: 30px;
-            text-transform: uppercase;
-        }
-        .input-group {
-            margin-bottom: 20px;
-        }
-        .input-group label {
-            display: block;
-            margin-bottom: 5px;
-            color: #daab47;
-            font-weight: bold;
-        }
-        .input-group input {
-            width: 100%;
-            padding: 10px;
-            background: #222;
-            border: 1px solid #5d2e0a;
-            color: white;
-            border-radius: 5px;
-            box-sizing: border-box;
-        }
-    </style>
+    <script src="application.js" defer></script>
 </head>
 <body>
     <header>
@@ -53,67 +19,35 @@
     </header>
     <main>
         <div class="app-container">
-            <h2>Ansøgning</h2>
+            <h2>Indsend Ansøgning til Grønt og Godt</h2>
             <form id="appForm">
                 <div class="input-group">
-                    <label>text</label>
-                    <input type="text" id="field1" required>
+                    <label for="field1">Fulde navn</label>
+                    <input type="text" id="field1" placeholder="Indtast dit navn..." required>
                 </div>
                 <div class="input-group">
-                    <label>text</label>
-                    <input type="text" id="field2" required>
+                    <label for="field2">Alder</label>
+                    <input type="text" id="field2" placeholder="Hvor gammel er du?" required>
                 </div>
                 <div class="input-group">
-                    <label>text</label>
-                    <input type="text" id="field3" required>
+                    <label for="field3">Discord Username</label>
+                    <input type="text" id="field3" placeholder="f.eks. brukernavn#0000" required>
                 </div>
                 <div class="input-group">
-                    <label>text</label>
-                    <input type="text" id="field4" required>
+                    <label for="field4">Hvorfor skal vi vælge dig?</label>
+                    <input type="text" id="field4" placeholder="Beskriv kort..." required>
                 </div>
                 <div class="input-group">
-                    <label>text</label>
-                    <input type="text" id="field5" required>
+                    <label for="field5">Tidligere erfaring</label>
+                    <input type="text" id="field5" placeholder="Har du arbejdet med dette før?" required>
                 </div>
                 <div class="input-group">
-                    <label>text</label>
-                    <input type="text" id="field6" required>
+                    <label for="field6">Yderligere info</label>
+                    <input type="text" id="field6" placeholder="Andet vi bør vide?" required>
                 </div>
-                <button type="submit" class="wood-button" style="width: 100%; margin-top: 10px;">Indsend</button>
+                <button type="submit" class="wood-button" style="width: 100%; margin-top: 10px;">Indsend Ansøgning</button>
             </form>
         </div>
     </main>
-    <script>
-        // Vent på at auth.js indlæser _supabase
-        window.addEventListener('load', () => {
-            const form = document.getElementById('appForm');
-            form.addEventListener('submit', async (e) => {
-                e.preventDefault();
-                
-                const { data: { user } } = await _supabase.auth.getUser();
-                
-                const applicationData = {
-                    user_email: user?.email || 'Anonym',
-                    field1: document.getElementById('field1').value,
-                    field2: document.getElementById('field2').value,
-                    field3: document.getElementById('field3').value,
-                    field4: document.getElementById('field4').value,
-                    field5: document.getElementById('field5').value,
-                    field6: document.getElementById('field6').value
-                };
-
-                const { data, error } = await _supabase
-                    .from('applications')
-                    .insert([applicationData]);
-
-                if (error) {
-                    alert("Der skete en fejl: " + error.message);
-                } else {
-                    alert("Din ansøgning er modtaget!");
-                    window.location.href = 'index.html';
-                }
-            });
-        });
-    </script>
 </body>
 </html>
