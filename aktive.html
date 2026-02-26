@@ -24,10 +24,29 @@
             margin-bottom: 20px;
             text-transform: uppercase;
         }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+            background: #111;
+        }
+        th, td {
+            border: 1px solid #5d2e0a;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background: #8b4513;
+            color: #ffd700;
+        }
+        tr:nth-child(even) {
+            background: #1a1a1a;
+        }
     </style>
 </head>
 <body>
     <header>
+        <div id="userEmail" class="user-display"></div>
         <div class="button-container">
             <button class="wood-button" onclick="location.href='admin.html'">Admin Panel</button>
             <button class="wood-button" onclick="location.href='index.html'">Hjem</button>
@@ -36,9 +55,75 @@
     </header>
     <main>
         <div class="aktive-container">
-            <h2>Aktive Brugere</h2>
-            <p>Dette er siden for aktive brugere.</p>
+            <h2>Aktive Ansøgninger</h2>
+            <div class="admin-content">
+                <table id="activeTable">
+                    <thead>
+                        <tr>
+                            <th>E-mail</th>
+                            <th>Felt 1</th>
+                            <th>Felt 2</th>
+                            <th>Felt 3</th>
+                            <th>Felt 4</th>
+                            <th>Felt 5</th>
+                            <th>Felt 6</th>
+                            <th>Handlinger</th>
+                        </tr>
+                    </thead>
+                    <tbody id="activeBody">
+                        <!-- Data indlæses her -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </main>
+    <script>
+        async function removeFromActive(id) {
+            if (confirm("Vil du flytte denne tilbage til afventende?")) {
+                const { error } = await _supabase
+                    .from('applications')
+                    .update({ status: 'pending' })
+                    .eq('id', id);
+                
+                if (error) alert("Fejl: " + error.message);
+                else location.reload();
+            }
+        }
+
+        window.addEventListener('load', async () => {
+            setTimeout(async () => {
+                const { data, error } = await _supabase
+                    .from('applications')
+                    .select('*')
+                    .eq('status', 'active')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error("Fejl:", error);
+                    return;
+                }
+
+                const tbody = document.getElementById('activeBody');
+                tbody.innerHTML = '';
+
+                data.forEach(app => {
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${app.user_email}</td>
+                        <td>${app.field1}</td>
+                        <td>${app.field2}</td>
+                        <td>${app.field3}</td>
+                        <td>${app.field4}</td>
+                        <td>${app.field5}</td>
+                        <td>${app.field6}</td>
+                        <td>
+                            <button class="wood-button" style="font-size: 0.7rem; padding: 5px 10px; background: orange;" onclick="removeFromActive('${app.id}')">Fjern</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }, 500);
+        });
+    </script>
 </body>
 </html>
