@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js" defer></script>
+    <style>
+        body {
+            /* Vi bruger baggrunden fra style.css */
+        }
+        .booking-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            border: 4px solid #8b4513;
+            color: white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .payment-section {
+            text-align: center;
+            border-bottom: 2px solid #5d2e0a;
+            padding-bottom: 30px;
+            margin-bottom: 30px;
+        }
+        .payment-section h2 {
+            font-size: 3.5rem;
+            color: #ffd700;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        .payment-methods {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            font-size: 2rem;
+            color: #daab47;
+        }
+        .booking-content {
+            text-align: center;
+        }
+        .booking-content p {
+            font-size: 3rem;
+            margin: 10px 0;
+            font-weight: bold;
+            color: #fff;
+        }
+        .highlight {
+            color: #ffd700;
+            display: block;
+            font-size: 4rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="button-container">
+            <button class="wood-button" onclick="location.href='index.html'">Hjem</button>
+        </div>
+    </header>
+    <main>
+        <div class="booking-container">
+            <div class="payment-section">
+                <h2>Betaling</h2>
+                <div class="payment-methods">
+                    <p>Mobilepay</p>
+                    <p>Kontanter</p>
+                </div>
+            </div>
+            <div class="booking-content">
+                <p>Book fra</p>
+                <p><a href="application.html" class="highlight" style="text-decoration: underline;">HER</a></p>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ansøgning - Træ Knapper</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js" defer></script>
+    <style>
+        .app-container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            border: 4px solid #8b4513;
+            color: white;
+        }
+        .app-container h2 {
+            text-align: center;
+            color: #ffd700;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+        }
+        .input-group {
+            margin-bottom: 20px;
+        }
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #daab47;
+            font-weight: bold;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            background: #222;
+            border: 1px solid #5d2e0a;
+            color: white;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="button-container">
+            <button class="wood-button" onclick="location.href='book.html'">Tilbage</button>
+            <button class="wood-button" onclick="location.href='index.html'">Hjem</button>
+        </div>
+    </header>
+    <main>
+        <div class="app-container">
+            <h2>Ansøgning</h2>
+            <form id="appForm">
+                <div class="input-group">
+                    <label>text</label>
+                    <input type="text" required>
+                </div>
+                <div class="input-group">
+                    <label>text</label>
+                    <input type="text" required>
+                </div>
+                <div class="input-group">
+                    <label>text</label>
+                    <input type="text" required>
+                </div>
+                <div class="input-group">
+                    <label>text</label>
+                    <input type="text" required>
+                </div>
+                <div class="input-group">
+                    <label>text</label>
+                    <input type="text" required>
+                </div>
+                <div class="input-group">
+                    <label>text</label>
+                    <input type="text" required>
+                </div>
+                <button type="submit" class="wood-button" style="width: 100%; margin-top: 10px;">Indsend</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

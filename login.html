@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Træ Knapper</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js" defer></script>
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 40px;
+            border-radius: 15px;
+            border: 3px solid #8b4513;
+            color: white;
+            text-align: center;
+        }
+        .login-container h2 {
+            margin-bottom: 25px;
+            color: #ffd700;
+            text-transform: uppercase;
+        }
+        .form-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: #daab47;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: 1px solid #5d2e0a;
+            background: #222;
+            color: white;
+            box-sizing: border-box;
+        }
+        .button-group {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 25px;
+        }
+        .back-link {
+            display: block;
+            margin-top: 20px;
+            color: #daab47;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="button-container">
+            <button class="wood-button" onclick="location.href='index.html'">Hjem</button>
+        </div>
+    </header>
+    <main>
+        <div class="login-container">
+            <h2 id="authTitle">Login</h2>
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" required placeholder="din@email.dk">
+                </div>
+                <div class="form-group">
+                    <label for="password">Kodeord</label>
+                    <input type="password" id="password" required placeholder="••••••••">
+                </div>
+                <div class="button-group">
+                    <button type="submit" class="wood-button" id="submitBtn">Log ind</button>
+                    <button type="button" class="wood-button" id="switchBtn" style="font-size: 0.8rem; padding: 10px;">Skift til opret konto</button>
+                </div>
+            </form>
+            <a href="index.html" class="back-link">← Tilbage til forsiden</a>
+        </div>
+    </main>
+</body>
+</html>
