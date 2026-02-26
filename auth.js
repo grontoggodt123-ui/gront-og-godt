@@ -51,14 +51,10 @@ if (authForm) {
                 window.location.href = 'index.html';
             }
         } else {
-            // Signup
+            // Signup - Hvis 'Confirm email' er slået fra i Supabase, logger den automatisk ind
             const { data, error } = await _supabase.auth.signUp({ email, password });
             if (error) {
-                if (error.message.includes("rate limit")) {
-                    alert("Supabase begrænser oprettelser lige nu. Vent venligst lidt eller brug en anden e-mail.");
-                } else {
-                    alert("Fejl: " + error.message);
-                }
+                alert("Fejl: " + error.message);
             } else {
                 if (data.session) {
                     alert("Konto oprettet og du er logget ind!");
