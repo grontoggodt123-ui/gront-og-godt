@@ -84,7 +84,7 @@ const checkStatus = async () => {
     const adminBtn = document.getElementById('adminBtn');
     const path = window.location.pathname;
     const isProtectedPage = path.includes('book.html') || path.includes('application.html');
-    const isAdminPage = path.includes('admin.html');
+    const isAdminPage = path.includes('admin.html') || path.includes('aktive.html');
 
     if (user) {
         // Tjek om brugeren er admin
