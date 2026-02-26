@@ -11,43 +11,76 @@ body {
 
 header {
     background-color: #000000;
-    padding: 15px 0;
+    padding: 15px 10px;
     border-bottom: 3px solid #ff0606;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .user-display {
     color: #ffd700;
     font-weight: bold;
-    padding-left: 30px;
-    font-size: 1.1rem;
+    padding-left: 10px;
+    font-size: 1rem;
     text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
 }
 
 .button-container {
     display: flex;
     justify-content: flex-end;
-    gap: 20px;
-    padding-right: 40px;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .wood-button {
-    background: linear-gradient(135deg, #914928#914928 50%, #8b4513 100%);
-    border: 3px solid #5d2e0a;
+    background: linear-gradient(135deg, #914928 0%, #a0522d 50%, #8b4513 100%);
+    border: 2px solid #5d2e0a;
     border-radius: 8px;
     color: #daab47;
-    padding: 15px 30px;
-    font-size: 1.2rem;
+    padding: 10px 15px;
+    font-size: 0.9rem;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
-    box-shadow: 2px 4px 5px rgba(255, 136, 0, 0.4);
+    box-shadow: 2px 4px 5px rgba(0, 0, 0, 0.4);
     transition: transform 0.1s, box-shadow 0.1s;
-    text-shadow: 1px 1px 2px rgba(255, 166, 0, 0.8);
-    position: relative;
-    overflow: hidden;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.8);
+    white-space: nowrap;
+}
+
+/* Mobil-optimering */
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .button-container {
+        justify-content: center;
+        width: 100%;
+    }
+    
+    .user-display {
+        padding-left: 0;
+        margin-bottom: 5px;
+    }
+    
+    .wood-button {
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    main {
+        padding: 20px 10px;
+    }
+
+    /* Gør tabeller rullebare på mobil */
+    .admin-content {
+        overflow-x: auto;
+    }
 }
 
 .wood-button::before {
