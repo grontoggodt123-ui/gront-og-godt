@@ -53,8 +53,21 @@ if (authForm) {
         } else {
             // Signup
             const { data, error } = await _supabase.auth.signUp({ email, password });
-            if (error) alert("Fejl: " + error.message);
-            else alert("Konto oprettet! Du kan nu logge ind.");
+            if (error) {
+                if (error.message.includes("rate limit")) {
+                    alert("Supabase begrænser oprettelser lige nu. Vent venligst lidt eller brug en anden e-mail.");
+                } else {
+                    alert("Fejl: " + error.message);
+                }
+            } else {
+                if (data.session) {
+                    alert("Konto oprettet og du er logget ind!");
+                    window.location.href = 'index.html';
+                } else {
+                    alert("Konto oprettet! Du kan nu logge ind.");
+                    window.location.href = 'login.html';
+                }
+            }
         }
     });
 }
