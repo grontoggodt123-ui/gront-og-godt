@@ -1,6 +1,6 @@
 // Supabase konfiguration
-const supabaseUrl = 'https://hpatkyorwwwmhxdxeirm.supabase.co';
-const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImhwYXRreW9yd3d3bWh4ZHhlaXJtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMTczMTgsImV4cCI6MjA4NzY5MzMxOH0.KKVJgw0HzntOhVJofGZtcw8RxVjJ7OIKD7xtRyKzOq4';
+const supabaseUrl = 'https://nhodgtvgkbowhedrqnez.supabase.co';
+const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ob2RndHZna2Jvd2hlZHJxbmV6Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzIxMjc4MTUsImV4cCI6MjA4NzcwMzgxNX0.Ii4unjhP9usXjyuiCVQU7ng0QSTJmh7P2DGoD_zkTPU';
 const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
 // Liste over godkendte admin e-mails (ERSTAT MED DINE EGNE)
@@ -51,10 +51,27 @@ if (authForm) {
                 window.location.href = 'index.html';
             }
         } else {
-            // Signup
+            // Signup - Hvis 'Confirm email' er slået fra i Supabase, logger den automatisk ind
             const { data, error } = await _supabase.auth.signUp({ email, password });
-            if (error) alert("Fejl: " + error.message);
-            else alert("Konto oprettet! Du kan nu logge ind.");
+            
+            if (error) {
+                alert("Fejl ved oprettelse: " + error.message);
+            } else {
+                // Forsøg at logge ind med det samme
+                const { data: loginData, error: loginError } = await _supabase.auth.signInWithPassword({ email, password });
+                
+                if (loginError) {
+                    if (loginError.message.includes("not confirmed")) {
+                        alert("Kontoen er oprettet, men skal bekræftes i Supabase Dashboard (Authentication -> Users -> Confirm User).");
+                    } else {
+                        alert("Konto oprettet! Log venligst ind manuelt.");
+                    }
+                    window.location.href = 'login.html';
+                } else {
+                    alert("Konto oprettet og du er logget ind!");
+                    window.location.href = 'index.html';
+                }
+            }
         }
     });
 }
