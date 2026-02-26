@@ -52,37 +52,67 @@
     </header>
     <main>
         <div class="app-container">
-            <h2>aAnsøgning</h2>
+            <h2>Ansøgning</h2>
             <form id="appForm">
                 <div class="input-group">
                     <label>text</label>
-                    <input type="text" required>
+                    <input type="text" id="field1" required>
                 </div>
                 <div class="input-group">
                     <label>text</label>
-                    <input type="text" required>
+                    <input type="text" id="field2" required>
                 </div>
                 <div class="input-group">
                     <label>text</label>
-                    <input type="text" required>
+                    <input type="text" id="field3" required>
                 </div>
                 <div class="input-group">
                     <label>text</label>
-                    <input type="text" required>
+                    <input type="text" id="field4" required>
                 </div>
                 <div class="input-group">
                     <label>text</label>
-                    <input type="text" required>
+                    <input type="text" id="field5" required>
                 </div>
                 <div class="input-group">
                     <label>text</label>
-                    <input type="text" required>
+                    <input type="text" id="field6" required>
                 </div>
                 <button type="submit" class="wood-button" style="width: 100%; margin-top: 10px;">Indsend</button>
             </form>
         </div>
     </main>
+    <script>
+        // Vent på at auth.js indlæser _supabase
+        window.addEventListener('load', () => {
+            const form = document.getElementById('appForm');
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const { data: { user } } = await _supabase.auth.getUser();
+                
+                const applicationData = {
+                    user_email: user?.email || 'Anonym',
+                    field1: document.getElementById('field1').value,
+                    field2: document.getElementById('field2').value,
+                    field3: document.getElementById('field3').value,
+                    field4: document.getElementById('field4').value,
+                    field5: document.getElementById('field5').value,
+                    field6: document.getElementById('field6').value
+                };
+
+                const { data, error } = await _supabase
+                    .from('applications')
+                    .insert([applicationData]);
+
+                if (error) {
+                    alert("Der skete en fejl: " + error.message);
+                } else {
+                    alert("Din ansøgning er modtaget!");
+                    window.location.href = 'index.html';
+                }
+            });
+        });
+    </script>
 </body>
 </html>
-
-
