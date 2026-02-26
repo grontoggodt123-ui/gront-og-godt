@@ -54,7 +54,7 @@ if (authForm) {
             // Signup
             const { data, error } = await _supabase.auth.signUp({ email, password });
             if (error) alert("Fejl: " + error.message);
-            else alert("Konto oprettet! Tjek din e-mail for bekræftelse.");
+            else alert("Konto oprettet! Du kan nu logge ind.");
         }
     });
 }
