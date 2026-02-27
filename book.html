@@ -3,10 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking - Træ Knapper</title>
+    <title>Book Græsslåning - Grønt og Godt</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js?v=2" defer></script>
+    <style>
+        .booking-info {
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: rgba(46, 125, 50, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 12px;
+            text-align: center;
+        }
+        .booking-info h3 {
+            color: #2e7d32;
+            margin-bottom: 1rem;
+        }
+        .booking-info p {
+            color: #2c3e50;
+            font-size: 1rem;
+            margin: 0.5rem 0;
+        }
+    </style>
 </head>
 <body>
     <header>
@@ -17,16 +37,18 @@
     </header>
     <main>
         <div class="booking-container">
-            <div class="payment-section">
-                <h2>Betaling</h2>
-                <div class="payment-methods">
-                    <p>Mobilepay</p>
-                    <p>Kontanter</p>
-                </div>
+            <h2>Book Græsslåning</h2>
+            
+            <div class="booking-info">
+                <h3>💳 Betalingsmetoder</h3>
+                <p>MobilePay</p>
+                <p>Kontanter</p>
             </div>
-            <div class="booking-content">
-                <p>Book din tid</p>
-                <p><a href="application.html" class="highlight">HER</a></p>
+
+            <div class="booking-info">
+                <h3>📅 Næste Step</h3>
+                <p>Vælg din dato og område nedenfor</p>
+                <button class="wood-button btn-book" onclick="location.href='application.html'" style="margin-top: 1rem; padding: 12px 30px; font-size: 1rem;">Book Nu</button>
             </div>
         </div>
     </main>
