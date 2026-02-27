@@ -26,7 +26,7 @@
     </header>
     <main>
         <div class="aktive-container">
-            <h2>Aktive Ansøgninger</h2>
+            <h2>Aktive Bookinger</h2>
             <div class="admin-content">
                 <table id="activeTable">
                     <thead>
@@ -64,7 +64,7 @@
         window.addEventListener('load', async () => {
             setTimeout(async () => {
                 const { data, error } = await _supabase
-                    .from('applications')
+                    .from('bookings')
                     .select('*')
                     .eq('status', 'active')
                     .order('created_at', { ascending: false });
