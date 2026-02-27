@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ansøgning - Grønt og Godt</title>
+    <title>Book Græsslåning - Grønt og Godt</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js?v=2" defer></script>
@@ -19,33 +19,33 @@
     </header>
     <main>
         <div class="app-container">
-            <h2>Indsend Ansøgning til Grønt og Godt</h2>
+            <h2>Book Græsslåning</h2>
             <form id="appForm">
                 <div class="input-group">
-                    <label for="field1">Fulde navn</label>
+                    <label for="field1">Dit Navn</label>
                     <input type="text" id="field1" placeholder="Indtast dit navn..." required>
                 </div>
                 <div class="input-group">
-                    <label for="field2">Alder</label>
-                    <input type="text" id="field2" placeholder="Hvor gammel er du?" required>
+                    <label for="field2">Adresse</label>
+                    <input type="text" id="field2" placeholder="Gade og nummer..." required>
                 </div>
                 <div class="input-group">
-                    <label for="field3">Discord Username</label>
-                    <input type="text" id="field3" placeholder="f.eks. brukernavn#0000" required>
+                    <label for="field3">Postnummer og By</label>
+                    <input type="text" id="field3" placeholder="f.eks. 2100 København" required>
                 </div>
                 <div class="input-group">
-                    <label for="field4">Hvorfor skal vi vælge dig?</label>
-                    <input type="text" id="field4" placeholder="Beskriv kort..." required>
+                    <label for="field4">Dato for Græsslåning</label>
+                    <input type="date" id="field4" required>
                 </div>
                 <div class="input-group">
-                    <label for="field5">Tidligere erfaring</label>
-                    <input type="text" id="field5" placeholder="Har du arbejdet med dette før?" required>
+                    <label for="field5">Størrelse på Område (m²)</label>
+                    <input type="text" id="field5" placeholder="f.eks. 500" required>
                 </div>
                 <div class="input-group">
-                    <label for="field6">Yderligere info</label>
-                    <input type="text" id="field6" placeholder="Andet vi bør vide?" required>
+                    <label for="field6">Øvrige Bemærkninger</label>
+                    <input type="text" id="field6" placeholder="F.eks. adgang, hindringer osv." required>
                 </div>
-                <button type="submit" class="wood-button btn-book" style="width: 100%; margin-top: 10px;">Indsend Ansøgning</button>
+                <button type="submit" class="wood-button btn-book" style="width: 100%; margin-top: 10px;">Book Nu</button>
             </form>
         </div>
     </main>
