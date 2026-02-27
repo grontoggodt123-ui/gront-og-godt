@@ -16,7 +16,7 @@
         </div>
     </header>
     <main>
-        <div class="app-container">
+        <div class="app-container" id="formContainer">
             <h2>Kontakt Os</h2>
             <form id="contactForm">
                 <div class="input-group">
@@ -38,6 +38,12 @@
                 </div>
                 <button type="submit" class="wood-button btn-book" style="width: 100%; margin-top: 10px;">Send Besked</button>
             </form>
+        </div>
+
+        <div class="app-container" id="confirmationContainer" style="display: none; text-align: center;">
+            <h2 style="color: #2e7d32; margin-bottom: 2rem;">Tak for din besked!</h2>
+            <p style="font-size: 1.1rem; color: #2c3e50; margin-bottom: 2rem;">Vi har modtaget din henvendelse og vil kontakte dig snart via email.</p>
+            <button class="wood-button btn-book" onclick="location.href='index.html'" style="padding: 12px 30px; font-size: 1rem;">OK</button>
         </div>
     </main>
     <script>
@@ -71,8 +77,8 @@
             if (error) {
                 alert('Fejl ved afsendelse: ' + error.message);
             } else {
-                alert('Tak for din besked! Vi vender tilbage hurtigst muligt.');
-                location.href = 'index.html';
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('confirmationContainer').style.display = 'block';
             }
         });
     </script>
