@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beskeder - Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js?v=2" defer></script>
+</head>
+<body>
+    <header>
+        <div id="userEmail" class="user-display"></div>
+        <div class="button-container">
+            <button class="wood-button" onclick="location.href='admin.html'">Ansøgninger</button>
+            <button class="wood-button" onclick="location.href='aktive.html'">Aktive</button>
+            <button class="wood-button" onclick="location.href='index.html'">Hjem</button>
+            <button class="wood-button" id="loginBtn">Log ud</button>
+        </div>
+    </header>
+    <main>
+        <div class="admin-container" style="max-width: 1000px;">
+            <h2>Beskeder fra Kontaktformular</h2>
+            <div class="admin-content">
+                <table id="messageTable">
+                    <thead>
+                        <tr>
+                            <th>Afsender</th>
+                            <th>Emne</th>
+                            <th>Besked</th>
+                            <th>Dato</th>
+                            <th>Handlinger</th>
+                        </tr>
+                    </thead>
+                    <tbody id="messageBody">
+                        <!-- Data indlæses her -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+    <script>
+        async function deleteMessage(id) {
+            if (confirm("Vil du slette denne besked?")) {
+                const { error } = await _supabase
+                    .from('contact_messages')
+                    .delete()
+                    .eq('id', id);
+                
+                if (error) alert("Fejl: " + error.message);
+                else location.reload();
+            }
+        }
+
+        window.addEventListener('load', () => {
+            setTimeout(async () => {
+                const { data, error } = await _supabase
+                    .from('contact_messages')
+                    .select('*')
+                    .order('created_at', { ascending: false });
+
+                if (error) {
+                    console.error("Fejl:", error);
+                    return;
+                }
+
+                const tbody = document.getElementById('messageBody');
+                tbody.innerHTML = '';
+
+                data.forEach(msg => {
+                    const date = new Date(msg.created_at).toLocaleString('da-DK');
+                    const tr = document.createElement('tr');
+                    tr.innerHTML = `
+                        <td>${msg.user_email}</td>
+                        <td style="text-transform: capitalize;">${msg.topic}</td>
+                        <td style="max-width: 300px; white-space: normal;">${msg.message}</td>
+                        <td>${date}</td>
+                        <td>
+                            <button class="wood-button" style="font-size: 0.7rem; padding: 5px 10px; background: rgba(220, 53, 69, 0.6); border-color: rgba(255,255,255,0.3);" onclick="deleteMessage('${msg.id}')">Slet</button>
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
