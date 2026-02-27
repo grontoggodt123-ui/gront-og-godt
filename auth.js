@@ -71,7 +71,7 @@ const checkStatus = async () => {
     const userDisplay = document.getElementById('userEmail');
     
     const path = window.location.pathname;
-    const isProtectedPage = path.includes('book.html') || path.includes('application.html');
+    const isProtectedPage = path.includes('book.html') || path.includes('application.html') || path.includes('contact.html');
     const isAdminPage = path.includes('admin.html') || path.includes('aktive.html');
 
     // Håndter book knappen på forsiden
