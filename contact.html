@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kontakt Os - Grønt og Godt</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js?v=2" defer></script>
+</head>
+<body>
+    <header>
+        <div id="userEmail" class="user-display"></div>
+        <div class="button-container">
+            <button class="wood-button" onclick="location.href='index.html'">Hjem</button>
+        </div>
+    </header>
+    <main>
+        <div class="app-container">
+            <h2>Kontakt Os</h2>
+            <form id="contactForm">
+                <div class="input-group">
+                    <label for="topic">Hvad drejer din henvendelse sig om?</label>
+                    <select id="topic" class="glass-select" required>
+                        <option value="" disabled selected>Vælg en kategori...</option>
+                        <option value="spørgsmål">Spørgsmål</option>
+                        <option value="priser">Priser</option>
+                        <option value="andet">Andet</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label for="message">Din besked</label>
+                    <textarea id="message" rows="5" placeholder="Skriv din besked her..." required></textarea>
+                </div>
+                <button type="submit" class="wood-button btn-book" style="width: 100%; margin-top: 10px;">Send Besked</button>
+            </form>
+        </div>
+    </main>
+    <script>
+        document.getElementById('contactForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Tak for din besked! Vi vender tilbage hurtigst muligt.');
+            location.href = 'index.html';
+        });
+    </script>
+</body>
+</html>
