@@ -20,6 +20,10 @@
             <h2>Kontakt Os</h2>
             <form id="contactForm">
                 <div class="input-group">
+                    <label for="email">Din E-mail</label>
+                    <input type="email" id="email" placeholder="din@email.dk" readonly>
+                </div>
+                <div class="input-group">
                     <label for="topic">Hvad drejer din henvendelse sig om?</label>
                     <select id="topic" class="glass-select" required>
                         <option value="" disabled selected>Vælg en kategori...</option>
@@ -37,11 +41,41 @@
         </div>
     </main>
     <script>
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
+        window.addEventListener('load', async () => {
+            const { data: { user } } = await _supabase.auth.getUser();
+            
+            if (!user) {
+                location.href = 'login.html';
+                return;
+            }
+            
+            document.getElementById('email').value = user.email;
+        });
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            alert('Tak for din besked! Vi vender tilbage hurtigst muligt.');
-            location.href = 'index.html';
+            
+            const email = document.getElementById('email').value;
+            const topic = document.getElementById('topic').value;
+            const message = document.getElementById('message').value;
+
+            const { error } = await _supabase
+                .from('contact_messages')
+                .insert([{ 
+                    user_email: email, 
+                    topic: topic, 
+                    message: message,
+                    status: 'unread'
+                }]);
+
+            if (error) {
+                alert('Fejl ved afsendelse: ' + error.message);
+            } else {
+                alert('Tak for din besked! Vi vender tilbage hurtigst muligt.');
+                location.href = 'index.html';
+            }
         });
     </script>
 </body>
 </html>
+
