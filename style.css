@@ -169,30 +169,33 @@ table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 2rem;
-    background: white;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
     border-radius: 12px;
     overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 th {
-    background: var(--primary);
+    background: rgba(46, 125, 50, 0.5);
     color: white;
     padding: 1.2rem;
     text-align: left;
     font-size: 0.85rem;
     font-weight: 700;
     text-transform: uppercase;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 td {
     padding: 1.2rem;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     font-size: 0.9rem;
-    color: var(--text-dark);
+    color: white;
 }
 
 tr:hover td {
-    background: #f1f8e9;
+    background: rgba(255, 255, 255, 0.1);
 }
 
 /* Custom elements */
