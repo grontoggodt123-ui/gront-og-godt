@@ -26,7 +26,7 @@
     </header>
     <main>
         <div class="admin-container">
-            <h2>Indsendte Ansøgninger</h2>
+            <h2>Indsendte Bookinger</h2>
             <div class="admin-content">
                 <table id="appTable">
                     <thead>
@@ -75,7 +75,7 @@
         window.addEventListener('load', async () => {
             setTimeout(async () => {
                 const { data, error } = await _supabase
-                    .from('applications')
+                    .from('bookings')
                     .select('*')
                     .eq('status', 'pending')
                     .order('created_at', { ascending: false });
@@ -110,4 +110,3 @@
     </script>
 </body>
 </html>
-
