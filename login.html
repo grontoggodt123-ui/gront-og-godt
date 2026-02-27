@@ -8,41 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="auth.js?v=2" defer></script>
     <style>
-        .login-container {
-            width: 90%;
-            max-width: 400px;
-            margin: 50px auto;
-            background: rgba(0, 0, 0, 0.8);
-            padding: 30px;
-            border-radius: 15px;
-            border: 3px solid #8b4513;
-            color: white;
-            text-align: center;
-            box-sizing: border-box;
-        }
-        .login-container h2 {
-            margin-bottom: 25px;
-            color: #ffd700;
-            text-transform: uppercase;
-        }
-        .form-group {
-            margin-bottom: 20px;
-            text-align: left;
-        }
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #daab47;
-        }
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 5px;
-            border: 1px solid #5d2e0a;
-            background: #222;
-            color: white;
-            box-sizing: border-box;
-        }
         .button-group {
             display: flex;
             flex-direction: column;
@@ -52,9 +17,10 @@
         .back-link {
             display: block;
             margin-top: 20px;
-            color: #daab47;
+            color: var(--primary);
             text-decoration: none;
             font-size: 0.9rem;
+            font-weight: 700;
         }
         .back-link:hover {
             text-decoration: underline;
