@@ -33,8 +33,8 @@ window.addEventListener('load', () => {
             if (error) {
                 alert("Der skete en fejl: " + error.message);
             } else {
-                alert("Din booking er modtaget!");
-                window.location.href = 'index.html';
+                document.getElementById('formContainer').style.display = 'none';
+                document.getElementById('confirmationContainer').style.display = 'block';
             }
         } catch (err) {
             console.error("Systemfejl:", err);
