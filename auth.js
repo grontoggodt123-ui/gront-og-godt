@@ -42,8 +42,7 @@ if (authForm) {
             const { data, error } = await _supabase.auth.signInWithPassword({ email, password });
             if (error) alert("Fejl: " + error.message);
             else {
-                alert("Login succesfuld!");
-                window.location.href = 'index.html';
+                window.location.href = 'success.html?type=login';
             }
         } else {
             const { data, error } = await _supabase.auth.signUp({ 
@@ -56,7 +55,7 @@ if (authForm) {
             else {
                 const { error: loginError } = await _supabase.auth.signInWithPassword({ email, password });
                 if (loginError) window.location.href = 'login.html';
-                else window.location.href = 'index.html';
+                else window.location.href = 'success.html?type=signup';
             }
         }
     });
@@ -80,8 +79,7 @@ const checkStatus = async () => {
             if (user) {
                 window.location.href = 'book.html';
             } else {
-                alert("Opret konto først");
-                window.location.href = 'login.html?mode=signup';
+                window.location.href = 'success.html?type=need_account';
             }
         };
     }
