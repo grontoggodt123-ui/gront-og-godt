@@ -75,7 +75,7 @@
         window.addEventListener('load', async () => {
             setTimeout(async () => {
                 const { data, error } = await _supabase
-                    .from('bookings')
+                    .from('applications')
                     .select('*')
                     .eq('status', 'pending')
                     .order('created_at', { ascending: false });
