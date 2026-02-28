@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="da">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bekræftelse - Grønt og Godt</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="auth.js?v=2" defer></script>
+</head>
+<body>
+    <header>
+        <div id="userEmail" class="user-display"></div>
+        <div class="button-container">
+            <button class="wood-button" onclick="location.href='index.html'">Hjem</button>
+        </div>
+    </header>
+    <main>
+        <div class="app-container" style="text-align: center;">
+            <h2 id="successTitle" style="color: #2e7d32; margin-bottom: 2rem;">Succes!</h2>
+            <p id="successMessage" style="font-size: 1.1rem; color: #2c3e50; margin-bottom: 2rem;"></p>
+            <button id="successBtn" class="wood-button btn-book" style="padding: 12px 30px; font-size: 1rem;">OK</button>
+        </div>
+    </main>
+
+    <script>
+        window.addEventListener('load', () => {
+            const params = new URLSearchParams(window.location.search);
+            const type = params.get('type');
+            const title = document.getElementById('successTitle');
+            const msg = document.getElementById('successMessage');
+            const btn = document.getElementById('successBtn');
+
+            let redirectUrl = 'index.html';
+
+            if (type === 'login') {
+                title.innerText = 'Login succesfuld!';
+                msg.innerText = 'Velkommen tilbage! Du er nu logget ind.';
+            } else if (type === 'signup') {
+                title.innerText = 'Konto oprettet!';
+                msg.innerText = 'Velkommen til! Din konto er nu oprettet og du er logget ind.';
+            } else if (type === 'admin_update') {
+                title.innerText = 'Opdateret!';
+                msg.innerText = 'Status er blevet opdateret korrekt.';
+                redirectUrl = 'admin.html';
+            } else if (type === 'admin_delete') {
+                title.innerText = 'Slettet!';
+                msg.innerText = 'Ansøgningen er blevet slettet.';
+                redirectUrl = 'admin.html';
+            } else if (type === 'message_delete') {
+                title.innerText = 'Slettet!';
+                msg.innerText = 'Beskeden er blevet slettet.';
+                redirectUrl = 'messages.html';
+            } else if (type === 'need_account') {
+                title.innerText = 'Log ind påkrævet';
+                msg.innerText = 'Du skal oprette en konto eller logge ind for at booke.';
+                btn.innerText = 'Til Login';
+                redirectUrl = 'login.html?mode=signup';
+            } else {
+                msg.innerText = 'Handlingen blev gennemført succesfuldt.';
+            }
+
+            btn.onclick = () => {
+                location.href = redirectUrl;
+            };
+        });
+    </script>
+</body>
+</html>
