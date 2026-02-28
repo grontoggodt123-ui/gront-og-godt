@@ -27,7 +27,7 @@ window.addEventListener('load', () => {
 
         try {
             const { error } = await _supabase
-                .from('bookings')
+                .from('applications')
                 .insert([bookingData]);
 
             if (error) {
