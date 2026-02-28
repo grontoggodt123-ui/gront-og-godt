@@ -57,7 +57,7 @@
                 .eq('id', id);
             
             if (error) alert("Fejl ved opdatering: " + error.message);
-            else location.reload();
+            else location.href = 'success.html?type=admin_update';
         }
 
         async function deleteApp(id) {
@@ -68,7 +68,7 @@
                     .eq('id', id);
                 
                 if (error) alert("Fejl ved sletning: " + error.message);
-                else location.reload();
+                else location.href = 'success.html?type=admin_delete';
             }
         }
 
